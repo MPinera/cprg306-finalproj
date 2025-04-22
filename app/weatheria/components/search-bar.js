@@ -18,7 +18,7 @@ export default function SearchBar({ onSearch }) {
           type="text"
           value={city}
           onChange={(e) => setCity(e.target.value)}
-          placeholder="Enter city name..."
+          placeholder="Search..."
           className="w-full px-4 py-3 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-sky-400 text-black bg-gradient-to-br from-sky-400 to-gray-500"
         />
         <button
