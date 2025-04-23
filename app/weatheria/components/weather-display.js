@@ -53,14 +53,14 @@ export default function WeatherDisplay({ data }) {
   };
 
   return (
-    <div className="mt-8 bg-white rounded-xl shadow-lg overflow-hidden">
+    <div className="mt-8 bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
       <div className="p-6">
         <div className="flex justify-between items-center mb-4">
           <div>
-            <h2 className="text-2xl font-bold text-gray-800">
+            <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-200">
               {name}, {sys.country}
             </h2>
-            <p className="text-gray-500">{formattedDate}</p>
+            <p className="text-gray-500 dark:text-gray-400">{formattedDate}</p>
           </div>
           <div className="flex items-center">{getWeatherIcon(icon)}</div>
         </div>
@@ -68,32 +68,48 @@ export default function WeatherDisplay({ data }) {
         <div className="flex flex-col md:flex-row justify-between">
           <div className="mb-4 md:mb-0">
             <div className="flex items-end">
-              <span className="text-5xl font-bold text-gray-800">
+              <span className="text-5xl font-bold text-gray-800 dark:text-gray-200">
                 {celsiusTemp}°
               </span>
-              <span className="text-xl text-gray-500 ml-1">C</span>
+              <span className="text-xl text-gray-500 dark:text-gray-400 ml-1">
+                C
+              </span>
             </div>
-            <p className="text-gray-600 capitalize">{description}</p>
+            <p className="text-gray-600 dark:text-gray-400 capitalize">
+              {description}
+            </p>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
-            <div className="bg-gray-100 p-3 rounded-lg">
-              <p className="text-sm text-gray-500">Feels Like</p>
-              <p className="text-xl font-semibold text-black">{feelsLike}°C</p>
+            <div className="bg-gray-100 dark:bg-gray-700 p-3 rounded-lg">
+              <p className="text-sm text-gray-500 dark:text-gray-300">
+                Feels Like
+              </p>
+              <p className="text-xl font-semibold text-black dark:text-white">
+                {feelsLike}°C
+              </p>
             </div>
-            <div className="bg-gray-100 p-3 rounded-lg">
-              <p className="text-sm text-gray-500">Humidity</p>
-              <p className="text-xl font-semibold text-black">{humidity}%</p>
+            <div className="bg-gray-100 dark:bg-gray-700 p-3 rounded-lg">
+              <p className="text-sm text-gray-500 dark:text-gray-300">
+                Humidity
+              </p>
+              <p className="text-xl font-semibold text-black dark:text-white">
+                {humidity}%
+              </p>
             </div>
-            <div className="bg-gray-100 p-3 rounded-lg">
-              <p className="text-sm text-gray-500">Wind Speed</p>
-              <p className="text-xl font-semibold text-black">
+            <div className="bg-gray-100 dark:bg-gray-700 p-3 rounded-lg">
+              <p className="text-sm text-gray-500 dark:text-gray-300">
+                Wind Speed
+              </p>
+              <p className="text-xl font-semibold text-black dark:text-white">
                 {wind.speed} m/s
               </p>
             </div>
-            <div className="bg-gray-100 p-3 rounded-lg">
-              <p className="text-sm text-gray-500">Min/Max Temp</p>
-              <p className="text-xl font-semibold text-black">
+            <div className="bg-gray-100 dark:bg-gray-700 p-3 rounded-lg">
+              <p className="text-sm text-gray-500 dark:text-gray-300">
+                Min/Max Temp
+              </p>
+              <p className="text-xl font-semibold text-black dark:text-white">
                 {minTemp}°/{maxTemp}°
               </p>
             </div>

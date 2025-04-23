@@ -6,7 +6,7 @@ export default function Page() {
       className="min-h-screen flex items-center justify-center p-4 md:p-8 dark:from-gray-800 dark:to-gray-900 transition-colors bg-gradient-to-b from-sky-400 to-blue-500"
       style={{ textAlign: "center" }}
     >
-      <div className="text-bold font-bold">
+      <div className="text-bold text-white font-bold">
         <h1 style={{ fontSize: "3rem", marginBottom: "1rem" }}>
           CPRG 306: Web Development 2 - Project
         </h1>

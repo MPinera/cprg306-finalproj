@@ -85,7 +85,6 @@ function getDaySummary(forecasts) {
   // Find min and max temperatures
   let minTemp = Number.POSITIVE_INFINITY;
   let maxTemp = Number.NEGATIVE_INFINITY;
-  const mostFrequentWeather = {};
   const weatherCounts = {};
 
   // Convert from Kelvin to Celsius
