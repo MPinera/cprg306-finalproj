@@ -19,11 +19,11 @@ export default function SearchBar({ onSearch }) {
           value={city}
           onChange={(e) => setCity(e.target.value)}
           placeholder="Search..."
-          className="w-full px-4 py-3 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-sky-400 text-black bg-gradient-to-br from-sky-400 to-gray-500"
+          className="w-full px-4 py-3 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-gray-400 text-white"
         />
         <button
           type="submit"
-          className="absolute right-2 p-2 text-gray-500 hover:text-gray-600"
+          className="absolute right-2 p-2 text-white hover:text-gray-600"
           aria-label="Search"
         >
           <Search size={20} />

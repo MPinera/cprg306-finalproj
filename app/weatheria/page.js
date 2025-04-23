@@ -2,10 +2,19 @@
 
 import { useState, useEffect } from "react";
 import SearchBar from "./components/search-bar";
-import { fetchWeatherByCity, fetchWeatherByCoords } from "./lib/document";
+import {
+  fetchWeatherByCity,
+  fetchWeatherByCoords,
+  fetchForecastByCity,
+  fetchForecastByCoords,
+} from "./lib/document";
+import WeatherDisplay from "./components/weather-display";
+import ForecastDisplay from "./components/forecast-display";
+import Toggle from "./components/toggle";
 
 export default function Home() {
   const [weatherData, setWeatherData] = useState(null);
+  const [forecastData, setForecastData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -15,11 +24,19 @@ export default function Home() {
       navigator.geolocation.getCurrentPosition(
         async (position) => {
           try {
-            const data = await fetchWeatherByCoords(
-              position.coords.latitude,
-              position.coords.longitude
-            );
-            setWeatherData(data);
+            const [weather, forecast] = await Promise.all([
+              fetchWeatherByCoords(
+                position.coords.latitude,
+                position.coords.longitude
+              ),
+              fetchForecastByCoords(
+                position.coords.latitude,
+                position.coords.longitude
+              ),
+            ]);
+
+            setWeatherData(weather);
+            setForecastData(forecast);
             setError(null);
           } catch (err) {
             setError(
@@ -43,8 +60,13 @@ export default function Home() {
 
     setLoading(true);
     try {
-      const data = await fetchWeatherByCity(city);
-      setWeatherData(data);
+      const [weather, forecast] = await Promise.all([
+        fetchWeatherByCity(city),
+        fetchForecastByCity(city),
+      ]);
+
+      setWeatherData(weather);
+      setForecastData(forecast);
       setError(null);
     } catch (err) {
       setError("Location not found. Please try another search.");
@@ -55,11 +77,14 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen p-4 md:p-8 bg-gradient-to-br from-sky-400 to-gray-500">
+    <main className="min-h-screen p-4 md:p-8 dark:from-gray-800 dark:to-gray-900 transition-colors bg-gradient-to-b from-sky-400 to-blue-800">
       <div className="max-w-3xl mx-auto">
-        <h1 className="text-3xl md:text-4xl font-semi-bold text-white text-center mb-8">
-          Weatheria
-        </h1>
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-3xl md:text-4xl font-bold text-white">
+            Weatheria
+          </h1>
+          <Toggle />
+        </div>
 
         <SearchBar onSearch={handleSearch} />
 
@@ -70,9 +95,15 @@ export default function Home() {
         )}
 
         {error && (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mt-4">
+          <div className="bg-red-100 dark:bg-red-900 border border-red-400 dark:border-red-700 text-red-700 dark:text-red-300 px-4 py-3 rounded mt-4">
             {error}
           </div>
+        )}
+
+        {weatherData && !loading && <WeatherDisplay data={weatherData} />}
+
+        {forecastData && !loading && (
+          <ForecastDisplay forecastData={forecastData} />
         )}
       </div>
     </main>
